@@ -14,9 +14,9 @@ a {
 .separator-before::before {
     content: '';
     height: 24px;
-    margin: -2px -10px;
+    margin: 2px -10px;
     position: absolute;
-    width: 1px;
+    width: 1.5px;
     background: #48494A;
     display: block;
 }
@@ -32,4 +32,36 @@ a {
 .swkids {
     max-height: 20px;
     max-width: 40px;
+    transform: translate(0, -2px);
 }
+.DropDown {
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 8px 0 0;
+    padding: 5px;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
