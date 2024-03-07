@@ -13,7 +13,7 @@ export const Navbar = () => {
 	return (
 		<nav className="navbar navbar-light mb-3">
 			<div className="row w-100">
-				<div className="col-4 d-flex justify-content-start align-items-center">
+				<div className="col-4 testPadding d-flex justify-content-start align-items-center">
 					<ul>
 						<li className="social-icon tiktok">
 							<i class="bi bi-tiktok"></i>
@@ -36,12 +36,12 @@ export const Navbar = () => {
 					</ul>
 					
 				</div>
-				<div className="col-4 d-flex justify-content-center">
+				<div className="col-4 testPadding logoIMG d-flex justify-content-center">
 					<Link to="/">
 						<span className="navbar-brand mb-0 h1"><img height={80} width={185} src="https://lumiere-a.akamaihd.net/v1/images/sw_logo_stacked_2x-52b4f6d33087_7ef430af.png?region=0,0,586,254"></img></span>
 					</Link>
 				</div>
-				<div className="col-4 ml-auto d-flex justify-content-end align-items-center">
+				<div className="col-4 mx-auto testPadding d-flex justify-content-end align-items-center">
 					<div class="btn-group">
   						<button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     						Favorites
