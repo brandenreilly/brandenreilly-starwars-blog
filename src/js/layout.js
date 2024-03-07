@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React, { createContext, useState } from "react";
+import { BrowserRouter, Route, Routes, useSearchParams } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./views/home";
@@ -21,18 +21,16 @@ import { LoginPage } from "./component/login.jsx";
 // 4. Map thru all characters and call card component. pass down props.
 // 5. Clickable cards - expands into a whole new view component ("Details") to show all details about a char.
 // 6. 
-
-
-
-
+export const AppContext = createContext(null);
 //create your first component
 const Layout = () => {
+	const [favorites , setFavorites] = useState([]);
 	//the basename is used when your project is published in a subdirectory and not in the root of the domain
 	// you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
 	const basename = process.env.BASENAME || "";
-
 	return (
 		<div>
+			<AppContext.Provider value={{ favorites , setFavorites }}>
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
 					<Navbar />
@@ -48,6 +46,7 @@ const Layout = () => {
 					<Footer />
 				</ScrollToTop>
 			</BrowserRouter>
+			</AppContext.Provider>
 		</div>
 	);
 };

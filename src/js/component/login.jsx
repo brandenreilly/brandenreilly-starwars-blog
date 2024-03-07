@@ -17,7 +17,7 @@ export const LoginPage = () => {
                     </div>
                     <div className="text-center mx-auto w-100 d-flex justify-content-center align-items-center" style={{display: "block"}}>
                         <label htmlFor="password"><i className="fas fa-key" style={{width: "20px" , height: "20px"}}></i></label>
-                        <input id="password" type="password" value={passwordInput} onChange={(e)=>{setPasswordInput(e.target.value)}} onKeyUp={(e)=>{if(e.key === "Enter"){setPasswordInput("");setUserNameInput("");if(usernameInput === "BRANDENREILLY"){setUserLoggedIn("BRANDENREILLY")}else{alert(`${usernameInput} was not found.`)}}}} />
+                        <input id="password" type="password" value={passwordInput} onChange={(e)=>{setPasswordInput(e.target.value)}} onKeyUp={(e)=>{if(e.key === "Enter"){setPasswordInput("");setUserNameInput("");if(usernameInput === "admin"){setUserLoggedIn("admin")}else{alert(`${usernameInput} was not found.`)}}}} />
                     </div>
                 </div>
             </div>
