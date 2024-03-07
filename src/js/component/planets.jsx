@@ -15,7 +15,7 @@ export const PlanetsPage = () => {
             <div className="d-flex row justify-content-center">
                 {planets.map((arrayItem,index)=>{
                     return (
-                        <div key={index} className="col-2 mx-2 mt-4">
+                        <div key={index} className="col-2 mx-2 mt-4 d-flex justify-content-center">
                             <Link to={{ pathname: '/planets/' + index}} state={{planet: arrayItem , imgUrl: cardImgUrl}}>
                                 <div className="card" style={{ width: "12rem" }}>
                                     <img src={cardImgUrl} className="card-img-top" alt="placeholder" />

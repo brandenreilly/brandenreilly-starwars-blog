@@ -13,7 +13,7 @@ import { CharacterCard } from "./component/character.jsx";
 import { DetailsPage } from "./component/details.jsx";
 import { PlanetsPage } from "./component/planets.jsx";
 import { PlanetDetails } from "./component/planetdetails.jsx";
-
+import { LoginPage } from "./component/login.jsx";
 
 // 1. Fetch "people" from API
 // 2. Set "people" from API inside a state hook/variable array.
@@ -42,6 +42,7 @@ const Layout = () => {
 						<Route path="/character/:charid" element={<DetailsPage />} />
 						<Route path="/planets" element={<PlanetsPage />} />
 						<Route path="/planets/:charid" element={<PlanetDetails />} />
+						<Route path="/login" element={<LoginPage />} />
 						<Route path="*" element={<h1 className="text-center">These are not the droids you are looking for...</h1>} />
 					</Routes>
 					<Footer />

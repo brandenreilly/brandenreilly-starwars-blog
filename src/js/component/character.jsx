@@ -13,7 +13,7 @@ export const CharacterCard = () => {
         <div className="d-flex row justify-content-center">
             {newCharacters.map((arrayItem,index)=>{
                 return (
-                    <div key={index} className="col-2 mx-2 mt-4">
+                    <div key={index} className="col-2 mx-2 mt-4 d-flex justify-content-center">
                         <Link to={{ pathname: '/character/' + index}} state={{character: arrayItem , imgUrl: cardImgUrl}}>
                         <div className="card" style={{ width: "12rem" }}>
                             <img src={cardImgUrl} className="card-img-top" alt="placeholder" />
