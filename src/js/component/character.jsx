@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AppContext } from "../layout";
 
 export const CharacterCard = () => {
-    const { favorites, setFavorites } = useContext(AppContext)
+    const { favorites, setFavorites, user } = useContext(AppContext)
     const [newCharacters, setNewCharacters] = useState([]);
     const [singleChar, setSingleChar] = useState([]);
     useEffect(() => {
@@ -12,6 +12,21 @@ export const CharacterCard = () => {
             .then(data => setNewCharacters(data.results))
     }, [])
     const cardImgUrl = "https://placehold.jp/150x150.png";
+    const handleNewFav = (char) => {
+        const options = {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                user_id: user[0].id,
+                name: char.name
+            })
+        }
+        fetch("https://silver-umbrella-x55g959wj69rcvj5p-3000.app.github.dev/favorites", options)
+            .then(resp => resp.json())
+            .then(data => data)
+    }
 
     return (
         <div className="d-flex row justify-content-center">
@@ -29,7 +44,7 @@ export const CharacterCard = () => {
                                         return elem.name == arrayItem.name
                                     })
                                     if (!result) {
-                                        let newFavorite = [...favorites, { name: arrayItem.name }]; setFavorites(newFavorite)
+                                        let newFavorite = [...favorites, { name: arrayItem.name }]; setFavorites(newFavorite); handleNewFav(arrayItem)
                                     } else {
                                         var removeFavorites = favorites.filter((elem) => {
                                             return elem.name != arrayItem.name

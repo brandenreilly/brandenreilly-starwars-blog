@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes, useSearchParams } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
@@ -25,12 +25,16 @@ export const AppContext = createContext(null);
 //create your first component
 const Layout = () => {
 	const [favorites , setFavorites] = useState([]);
+	const [user, setUser] = useState({
+		username: "",
+		id: 0
+	})
 	//the basename is used when your project is published in a subdirectory and not in the root of the domain
 	// you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
 	const basename = process.env.BASENAME || "";
 	return (
 		<div>
-			<AppContext.Provider value={{ favorites , setFavorites }}>
+			<AppContext.Provider value={{ favorites , setFavorites , user, setUser}}>
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
 					<Navbar />
