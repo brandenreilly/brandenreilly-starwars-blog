@@ -7,7 +7,7 @@ export const LoginPage = () => {
     const [passwordInput, setPasswordInput] = useState("")
     const { user, setUser, favorites, setFavorites } = useContext(AppContext)
 
-    const handleGetUser = () => {
+    const handleGetUser = async () => {
         const method = {
             method: 'POST',
             headers: {
@@ -18,9 +18,11 @@ export const LoginPage = () => {
         fetch("https://silver-umbrella-x55g959wj69rcvj5p-3000.app.github.dev/getuser", method)
             .then(resp => resp.json())
             .then(data => setUser(data))
-            .then(fetch(`https://silver-umbrella-x55g959wj69rcvj5p-3000.app.github.dev/favorites/${user[0].id}`)
+            .then(console.log(user[0].id))
+            .then(await fetch(`https://silver-umbrella-x55g959wj69rcvj5p-3000.app.github.dev/favorites/${user[0].id}`)
                 .then(resp => resp.json())
                 .then(data => setFavorites(data)))
+
     }
     return (
         <div className="d-flex justify-content-center">
@@ -36,7 +38,7 @@ export const LoginPage = () => {
                 </div>
                 <div className="text-center mx-auto">
                     <Link to={"/"}>
-                        <button className="btn btn-primary" onClick={() => { handleGetUser(); setPasswordInput(""); setUserInput("") }}>
+                        <button className="btn btn-primary" onClick={() => { handleGetUser(); setPasswordInput(""); setUserInput(""); handleGetFavs() }}>
                             Login
                         </button>
                     </Link>
