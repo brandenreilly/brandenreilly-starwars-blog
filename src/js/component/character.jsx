@@ -11,6 +11,11 @@ export const CharacterCard = () => {
             .then(resp => resp.json())
             .then(data => setNewCharacters(data.results))
     }, [])
+    useEffect(() => {
+        fetch(`https://silver-umbrella-x55g959wj69rcvj5p-3000.app.github.dev/favorites/${user[0].id}`)
+            .then(resp => resp.json())
+            .then(data => setFavorites(data))
+    }, [user])
     const cardImgUrl = "https://placehold.jp/150x150.png";
     const handleNewFav = (char) => {
         const options = {
