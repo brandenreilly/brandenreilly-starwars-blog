@@ -24,8 +24,8 @@ export const Navbar = () => {
 	}
 	return (
 		<nav className="navbar navbar-light mb-3">
-			<div className="row w-100">
-				<div className="col-4 testPadding d-flex justify-content-start align-items-center">
+			<div className="row w-100 mt-3">
+				<div className="col testPadding d-flex justify-content-start align-items-center mx-4">
 					<ul>
 						<li className="social-icon tiktok">
 							<i class="bi bi-tiktok"></i>
@@ -48,15 +48,15 @@ export const Navbar = () => {
 					</ul>
 					
 				</div>
-				<div className="col-4 testPadding logoIMG d-flex justify-content-center">
+				<div className="col testPadding logoIMG d-flex justify-content-center">
 					<Link to="/">
 						<span className="navbar-brand mb-0 h1"><img height={80} width={185} src="https://lumiere-a.akamaihd.net/v1/images/sw_logo_stacked_2x-52b4f6d33087_7ef430af.png?region=0,0,586,254"></img></span>
 					</Link>
 				</div>
-				<div className="col-4 mx-auto testPadding d-flex justify-content-end align-items-center">
-					<div class="btn-group">
-  						<button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    						Favorites
+				<div className="col mx-4 testPadding d-flex justify-content-end align-items-center">
+					<div class="btn-group mx-4">
+  						<button type="button" class="favBtn btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    						FAVORITES
   						</button>
   						<div class="dropdown-menu" style={{display: favorites.length == 0 ? "none" : ""}}>
     						{
@@ -69,14 +69,14 @@ export const Navbar = () => {
   						</div>
 					</div>
 						<Link to="/login">
-							<button className="btn btn-light">Login</button>
+							<button className="loginBtn btn btn-light">LOG IN<i className="fas fa-sign-in-alt signInIcon"></i></button>
 						</Link>
 				</div>
 			</div>
-			<div className="row w-100">
+			<div className="row w-100 mt-3">
 				<div className="col-12 d-flex justify-content-center">
-					<div class="dropdown">
-    					<button class="btn dropbtn" style={{color: "white"}}>News + Features 
+					<div class="text-styling dropdown">
+    					<button class="btn dropbtn" style={{color: "white"}}>NEWS + FEATURES 
       						<i class="fa fa-caret-down"></i>
     					</button>
     					<div class="dropdown-content">
@@ -85,8 +85,8 @@ export const Navbar = () => {
       						<a href="#">Link 3</a>
     					</div>
   					</div>
-					  <div class="dropdown">
-    					<button class="btn dropbtn" style={{color: "white"}}>Video 
+					  <div class="text-styling dropdown">
+    					<button class="btn dropbtn" style={{color: "white"}}>VIDEO 
       						<i class="fa fa-caret-down"></i>
     					</button>
     					<div class="dropdown-content">
@@ -95,8 +95,8 @@ export const Navbar = () => {
       						<a href="#">Link 3</a>
     					</div>
   					</div>
-					  <div class="dropdown">
-    					<button class="btn dropbtn" style={{color: "white"}}>Films 
+					  <div class="text-styling dropdown">
+    					<button class="btn dropbtn" style={{color: "white"}}>FILMS 
       						<i class="fa fa-caret-down"></i>
     					</button>
     					<div class="dropdown-content">
@@ -105,8 +105,8 @@ export const Navbar = () => {
       						<a href="#">Link 3</a>
     					</div>
   					</div> 
-					  <div class="dropdown">
-    					<button class="btn dropbtn" style={{color: "white"}}>Dropdown 
+					  <div class="text-styling dropdown">
+    					<button class="btn dropbtn" style={{color: "white"}}>DROPDOWN 
       						<i class="fa fa-caret-down"></i>
     					</button>
     					<div class="dropdown-content">
@@ -115,8 +115,8 @@ export const Navbar = () => {
       						<a href="#">Link 3</a>
     					</div>
   					</div> 
-					  <div class="dropdown">
-    					<button class="btn dropbtn" style={{color: "white"}}>Dropdown 
+					  <div class="dropdown text-styling">
+    					<button class="btn dropbtn" style={{color: "white"}}>DROPDOWN 
       						<i class="fa fa-caret-down"></i>
     					</button>
     					<div class="dropdown-content">
