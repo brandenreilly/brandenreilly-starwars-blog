@@ -3,14 +3,42 @@ import { Link } from "react-router-dom";
 import { AppContext } from "../layout";
 
 export const PlanetsPage = () => {
-    const { favorites, setFavorites } = useContext(AppContext)
+    const { favorites, setFavorites, user } = useContext(AppContext)
     const [planets, setPlanets] = useState([])
     useEffect(() => {
         fetch("https://www.swapi.tech/api/planets")
             .then(resp => resp.json())
             .then(data => setPlanets(data.results))
     }, [])
+    const handleGetFavs = () => {
+        fetch(`https://silver-umbrella-x55g959wj69rcvj5p-3000.app.github.dev/favorites/${user.id}`)
+            .then(resp => resp.json())
+            .then(data => setFavorites(data))
+    }
     const cardImgUrl = "https://placehold.jp/150x150.png";
+    const handleNewFav = (planet) => {
+        const options = {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                user_id: user.id,
+                name: planet.name
+            })
+        }
+        fetch("https://silver-umbrella-x55g959wj69rcvj5p-3000.app.github.dev/favorites", options)
+            .then(resp => {
+                if (resp.ok) {
+                    return resp.json()
+                }
+                else if (resp.status == 403) {
+                    alert("Favorite Already Exists.")
+                }
+            })
+            .then(data => data)
+            .then(() => handleGetFavs())
+    }
     return (
         <div className="text-center">
             <h1>Planets Page</h1>
@@ -25,18 +53,7 @@ export const PlanetsPage = () => {
                                 <div className="card-body d-flex justify-content-between align-items-center">
                                     <p className="card-text" style={{ color: "black" }}>{arrayItem.name}</p>
                                     <button className="btn btn-dark text-light" onClick={() => {
-                                        var result = favorites.find((elem) => {
-                                            return elem.name == arrayItem.name
-                                        })
-                                        if (!result) {
-                                            let newFavorite = [...favorites, { name: arrayItem.name }];
-                                            setFavorites(newFavorite)
-                                        } else {
-                                            var removeFavorites = favorites.filter((elem) => {
-                                                return elem.name != arrayItem.name
-                                            });
-                                            setFavorites(removeFavorites)
-                                        }
+                                        handleNewFav(arrayItem)
                                     }}><i class="bi bi-star-fill"></i></button>
                                 </div>
                             </div>

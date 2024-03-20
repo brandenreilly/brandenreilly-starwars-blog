@@ -1,13 +1,21 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { AppContext } from "../layout";
 
 export const LoginPage = () => {
     const [userInput, setUserInput] = useState("")
     const [passwordInput, setPasswordInput] = useState("")
-    const { user, setUser, favorites, setFavorites } = useContext(AppContext)
 
-    const handleGetUser = async () => {
+    const { user, setUser, favorites, setFavorites, userid, setUserid } = useContext(AppContext)
+
+    useEffect(() => {
+        if (user.id) {
+            handleGetFavs();
+            alert(`Welcome ${user.username}`)
+        }
+    }, [user])
+
+    const handleGetUser = () => {
         const method = {
             method: 'POST',
             headers: {
@@ -18,12 +26,14 @@ export const LoginPage = () => {
         fetch("https://silver-umbrella-x55g959wj69rcvj5p-3000.app.github.dev/getuser", method)
             .then(resp => resp.json())
             .then(data => setUser(data))
-            .then(console.log(user[0].id))
-            .then(await fetch(`https://silver-umbrella-x55g959wj69rcvj5p-3000.app.github.dev/favorites/${user[0].id}`)
-                .then(resp => resp.json())
-                .then(data => setFavorites(data)))
-
     }
+
+    const handleGetFavs = () => {
+        fetch(`https://silver-umbrella-x55g959wj69rcvj5p-3000.app.github.dev/favorites/${user.id}`)
+            .then(resp => resp.json())
+            .then(data => setFavorites(data))
+    }
+
     return (
         <div className="d-flex justify-content-center">
             <div className="borderDiv">
@@ -37,11 +47,9 @@ export const LoginPage = () => {
                     <input id="password" type="password" value={passwordInput} onChange={(e) => { setPasswordInput(e.target.value) }} onKeyUp={(e) => { if (e.key === "Enter") { handleGetUser(); setPasswordInput(""); setUserInput("") } }} />
                 </div>
                 <div className="text-center mx-auto">
-                    <Link to={"/"}>
-                        <button className="btn btn-primary" onClick={() => { handleGetUser(); setPasswordInput(""); setUserInput(""); handleGetFavs() }}>
-                            Login
-                        </button>
-                    </Link>
+                    <button className="btn btn-primary" onClick={() => { handleGetUser(); setPasswordInput(""); setUserInput(""); }}>
+                        Login
+                    </button>
                 </div>
             </div>
         </div>

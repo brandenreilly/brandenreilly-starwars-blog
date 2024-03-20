@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useContext , useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/home.css";
+import { AppContext } from "../layout";
+import { handleGetFavs } from "../component/login.jsx"
 
-export const Home = () => (
-	<div className="container-fluid text-center mt-5">
+
+export const Home = () => {
+	const { favorites, setFavorites, user } = useContext(AppContext)
+	return (
+		<div className="container-fluid text-center mt-5">
 		<div className="row">
 			<div className="col-12 image">
 				<h1 style={{fontSize: "48px"}}>Test Landing Page</h1>
@@ -21,4 +26,5 @@ export const Home = () => (
 			</div>
 		</div>
 	</div>
-);
+	)
+}

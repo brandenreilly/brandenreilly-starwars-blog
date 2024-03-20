@@ -11,11 +11,12 @@ export const CharacterCard = () => {
             .then(resp => resp.json())
             .then(data => setNewCharacters(data.results))
     }, [])
-    useEffect(() => {
-        fetch(`https://silver-umbrella-x55g959wj69rcvj5p-3000.app.github.dev/favorites/${user[0].id}`)
+
+    const handleGetFavs = () => {
+        fetch(`https://silver-umbrella-x55g959wj69rcvj5p-3000.app.github.dev/favorites/${user.id}`)
             .then(resp => resp.json())
             .then(data => setFavorites(data))
-    }, [user])
+    }
     const cardImgUrl = "https://placehold.jp/150x150.png";
     const handleNewFav = (char) => {
         const options = {
@@ -24,13 +25,21 @@ export const CharacterCard = () => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                user_id: user[0].id,
+                user_id: user.id,
                 name: char.name
             })
         }
         fetch("https://silver-umbrella-x55g959wj69rcvj5p-3000.app.github.dev/favorites", options)
-            .then(resp => resp.json())
+            .then(resp => {
+                if (resp.ok) {
+                    return resp.json()
+                }
+                else if (resp.status == 403) {
+                    alert("Favorite Already Exists.")
+                }
+            })
             .then(data => data)
+            .then(() => handleGetFavs())
     }
 
     return (
@@ -45,17 +54,7 @@ export const CharacterCard = () => {
                             <div className="card-body d-flex justify-content-between align-items-center">
                                 <p className="card-text" style={{ color: "black" }}>{arrayItem.name}</p>
                                 <button className="btn btn-dark text-light" onClick={() => {
-                                    var result = favorites.find((elem) => {
-                                        return elem.name == arrayItem.name
-                                    })
-                                    if (!result) {
-                                        let newFavorite = [...favorites, { name: arrayItem.name }]; setFavorites(newFavorite); handleNewFav(arrayItem)
-                                    } else {
-                                        var removeFavorites = favorites.filter((elem) => {
-                                            return elem.name != arrayItem.name
-                                        });
-                                        setFavorites(removeFavorites)
-                                    }
+                                    handleNewFav(arrayItem)
                                 }}><i class="bi bi-star-fill"></i></button>
                             </div>
                         </div>
