@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AppContext } from "../layout";
 
 export const Navbar = () => {
-	const { favorites , setFavorites , user } = useContext(AppContext)
+	const { favorites , setFavorites , user , setUser , isLoggedIn, setIsLoggedIn} = useContext(AppContext)
 	const handleDeleteFavs = (index) => {
 		const options = {
 			method: "DELETE",
@@ -22,6 +22,7 @@ export const Navbar = () => {
 		})
 		.then(data => setFavorites(data))
 	}
+	const cardImgUrl = "https://placehold.jp/150x150.png";
 	return (
 		<nav className="navbar navbar-light mb-3">
 			<div className="row w-100 mt-3">
@@ -61,7 +62,7 @@ export const Navbar = () => {
   						<div class="dropdown-menu" style={{display: favorites.length == 0 ? "none" : ""}}>
     						{
 								favorites.map((arrayItem , index)=>{
-									return <a className="dropdown-item">{index + 1}. {arrayItem.name} <i class="bi bi-trash-fill" style={{float: "right"}} onClick={()=>{handleDeleteFavs(index)}}></i></a>
+									return <a key={index} className="dropdown-item">{index + 1}. <Link to={`/${arrayItem.typeof}/${arrayItem.url}`} state={{character: arrayItem, planet: arrayItem, imgUrl: cardImgUrl}}>{arrayItem.name}</Link> <i class="bi bi-trash-fill" style={{float: "right"}} onClick={()=>{handleDeleteFavs(index)}}></i></a>
 								})
 							}
    						<div class="dropdown-divider"></div>
@@ -69,8 +70,9 @@ export const Navbar = () => {
   						</div>
 					</div>
 						<Link to="/login">
-							<button className="loginBtn btn btn-light">LOG IN<i className="fas fa-sign-in-alt signInIcon"></i></button>
+							<button className="loginBtn btn btn-light" style={{display: isLoggedIn ? "none" : ""}} >LOG IN<i className="fas fa-sign-in-alt signInIcon"></i></button>
 						</Link>
+							<button className="loginBtn btn btn-light" style={{display: isLoggedIn ? "" : "none"}} onClick={()=>{setIsLoggedIn(false);setUser({});setFavorites([])}} >LOG OUT<i className="fas fa-sign-in-alt signInIcon"></i></button>
 				</div>
 			</div>
 			<div className="row w-100 mt-3">

@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { AppContext } from "../layout";
 
 export const PlanetsPage = () => {
-    const { favorites, setFavorites, user } = useContext(AppContext)
-    const [planets, setPlanets] = useState([])
+    const { favorites, setFavorites, user, planets, setPlanets } = useContext(AppContext)
     useEffect(() => {
         fetch("https://www.swapi.tech/api/planets")
             .then(resp => resp.json())
@@ -24,7 +23,10 @@ export const PlanetsPage = () => {
             },
             body: JSON.stringify({
                 user_id: user.id,
-                name: planet.name
+                name: planet.name,
+                planet_id: planet.uid,
+                char_id: null,
+                typeof: "planets"
             })
         }
         fetch("https://silver-umbrella-x55g959wj69rcvj5p-3000.app.github.dev/favorites", options)

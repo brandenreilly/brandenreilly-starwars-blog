@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { AppContext } from "../layout";
 
 export const CharacterCard = () => {
-    const { favorites, setFavorites, user } = useContext(AppContext)
-    const [newCharacters, setNewCharacters] = useState([]);
+    const { favorites, setFavorites, user, newCharacters, setNewCharacters } = useContext(AppContext)
     const [singleChar, setSingleChar] = useState([]);
     useEffect(() => {
         fetch("https://www.swapi.tech/api/people")
@@ -26,7 +25,10 @@ export const CharacterCard = () => {
             },
             body: JSON.stringify({
                 user_id: user.id,
-                name: char.name
+                name: char.name,
+                char_id: char.uid,
+                planet_id: null,
+                typeof: "character"
             })
         }
         fetch("https://silver-umbrella-x55g959wj69rcvj5p-3000.app.github.dev/favorites", options)

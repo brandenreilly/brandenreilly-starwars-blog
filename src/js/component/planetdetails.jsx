@@ -1,18 +1,24 @@
-import React , { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 export const PlanetDetails = (props) => {
-    const [planetDetails , setPlanetDetails] = useState([])
-    useEffect(()=>{
-        fetch("https://www.swapi.tech/api/planets/" + planetInfo.uid)
-        .then(resp => resp.json())
-        .then(data => setPlanetDetails(data.result.properties))
-    }, [])
+    const [planetDetails, setPlanetDetails] = useState([])
     let { state } = useLocation();
     let planetInfo = state.planet;
     let planetImgUrl = state.imgUrl
+    useEffect(() => {
+        fetch("https://www.swapi.tech/api/planets/" + planetInfo.uid)
+            .then(resp => resp.json())
+            .then(data => setPlanetDetails(data.result.properties))
+    }, [])
+    useEffect(() => {
+        fetch("https://www.swapi.tech/api/planets/" + planetInfo.planet_id)
+            .then(resp => resp.json())
+            .then(data => setPlanetDetails(data.result.properties))
+
+    }, [])
     return (
-        <div>
+        <div className="text-center">
             <img src={planetImgUrl}></img>
             <h1>Name: {planetInfo.name}</h1>
             <p>Climate: {planetDetails.climate}</p>
@@ -23,7 +29,7 @@ export const PlanetDetails = (props) => {
             <p>Rotation Period: {planetDetails.rotation_period}</p>
             <p>Orbital Period: {planetDetails.orbital_period}</p>
             <p>Surface Water: {planetDetails.surface_water}</p>
-            <Link to={"/planets"}>    
+            <Link to={"/planets"}>
                 <button className="btn btn-light">Back to Planets</button>
             </Link>
         </div>
